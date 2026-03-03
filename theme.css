@@ -1,0 +1,255 @@
+/*
+  retro-larper
+  CRT-inspired Obsidian theme.
+*/
+
+:root {
+  --zl-radius-s: 2px;
+  --zl-radius-m: 4px;
+  --zl-radius-l: 8px;
+
+  --zl-font-ui: "Consolas", "Cascadia Mono", monospace;
+  --zl-font-body: "Consolas", "Cascadia Mono", monospace;
+  --zl-font-mono: "Consolas", "Cascadia Mono", monospace;
+
+  --zl-screen-glow: rgba(255, 211, 92, 0.09);
+  --zl-scanline: rgba(255, 216, 120, 0.045);
+  --zl-phosphor: rgba(255, 205, 96, 0.035);
+  --zl-rgb-red: rgba(255, 96, 64, 0.08);
+  --zl-rgb-cyan: rgba(96, 216, 255, 0.06);
+  --zl-flicker-a: 0.985;
+  --zl-flicker-b: 0.998;
+}
+
+.theme-light,
+.theme-dark {
+  --font-interface-theme: var(--zl-font-ui);
+  --font-text-theme: var(--zl-font-body);
+  --font-monospace-theme: var(--zl-font-mono);
+
+  --radius-s: var(--zl-radius-s);
+  --radius-m: var(--zl-radius-m);
+  --radius-l: var(--zl-radius-l);
+
+  --background-primary: #090805;
+  --background-primary-alt: #0c0b07;
+  --background-secondary: #11100a;
+  --background-secondary-alt: #18160d;
+  --background-modifier-hover: rgba(255, 214, 110, 0.06);
+  --background-modifier-border: rgba(255, 214, 110, 0.14);
+  --background-modifier-border-hover: rgba(255, 226, 148, 0.24);
+
+  --text-normal: #f8df8c;
+  --text-muted: #c9b06a;
+  --text-faint: #8b7748;
+  --text-accent: #ffd86d;
+  --text-accent-hover: #fff0a8;
+
+  --interactive-normal: #17140c;
+  --interactive-hover: #201b0f;
+  --interactive-accent: #e9b94b;
+  --interactive-accent-hover: #ffd86d;
+
+  --titlebar-background: #090805;
+  --titlebar-background-focused: #0d0b07;
+  --tab-text-color-focused-active: var(--text-normal);
+  --tab-container-background: #090805;
+  --tab-divider-color: rgba(255, 214, 110, 0.08);
+}
+
+body {
+  --h1-size: 2em;
+  --h2-size: 1.55em;
+  --h3-size: 1.25em;
+  --line-width: 780px;
+  text-shadow: 0 0 4px rgba(255, 216, 120, 0.14);
+  animation: zl-crt-flicker 0.16s infinite alternate;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+body::before {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      var(--zl-scanline) 2px,
+      var(--zl-scanline) 3px
+    ),
+    linear-gradient(90deg, var(--zl-rgb-red), transparent 18%, transparent 82%, var(--zl-rgb-cyan));
+  opacity: 0.95;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 48%, rgba(0, 0, 0, 0.38) 100%),
+    linear-gradient(90deg, rgba(255, 188, 58, 0.015), rgba(255, 245, 186, 0.035), rgba(255, 188, 58, 0.015));
+  mix-blend-mode: screen;
+}
+
+.workspace {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top center, var(--zl-screen-glow), transparent 36%),
+    radial-gradient(circle at bottom center, rgba(255, 193, 61, 0.04), transparent 40%),
+    linear-gradient(180deg, #0a0906 0%, #090805 100%);
+  transform: perspective(1800px) scale(0.985, 0.972) rotateX(1.2deg);
+  transform-origin: center center;
+  box-shadow:
+    inset 0 0 70px rgba(255, 218, 126, 0.04),
+    inset 0 0 180px rgba(0, 0, 0, 0.42);
+}
+
+.workspace::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0%, var(--zl-phosphor) 50%, transparent 100%);
+  opacity: 0.7;
+}
+
+.workspace::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.14) 78%, rgba(0, 0, 0, 0.34) 100%);
+  box-shadow:
+    inset 12px 0 28px rgba(0, 0, 0, 0.16),
+    inset -12px 0 28px rgba(0, 0, 0, 0.16),
+    inset 0 14px 28px rgba(255, 225, 150, 0.03),
+    inset 0 -16px 32px rgba(0, 0, 0, 0.3);
+}
+
+.mod-root .workspace-tab-header,
+.mod-root .workspace-tab-header-inner,
+.view-header,
+.status-bar {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-color: rgba(255, 214, 110, 0.08);
+}
+
+.markdown-source-view.mod-cm6 .cm-content,
+.markdown-preview-view {
+  line-height: 1.7;
+  color: var(--text-normal);
+  text-shadow:
+    -0.6px 0 0 var(--zl-rgb-red),
+    0.6px 0 0 var(--zl-rgb-cyan),
+    0 0 6px rgba(255, 216, 120, 0.08);
+}
+
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.cm-header-1,
+.cm-header-2,
+.cm-header-3 {
+  font-family: var(--zl-font-ui);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-accent);
+  text-shadow:
+    -1px 0 0 rgba(255, 96, 64, 0.1),
+    1px 0 0 rgba(96, 216, 255, 0.08),
+    0 0 8px rgba(255, 216, 109, 0.12);
+}
+
+.markdown-rendered blockquote,
+.HyperMD-quote {
+  border-left: 3px solid var(--interactive-accent);
+  background: rgba(255, 216, 109, 0.04);
+  border-radius: 0 var(--zl-radius-m) var(--zl-radius-m) 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 216, 109, 0.04);
+}
+
+.markdown-rendered a,
+.cm-link {
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+  color: var(--text-accent);
+}
+
+.markdown-rendered code,
+.cm-inline-code {
+  border-radius: var(--zl-radius-s);
+  background: rgba(255, 216, 109, 0.06);
+  color: #ffe9a8;
+}
+
+.markdown-rendered pre,
+.HyperMD-codeblock {
+  border-radius: var(--zl-radius-m);
+  border: 1px solid rgba(255, 216, 109, 0.08);
+  box-shadow: inset 0 0 18px rgba(255, 216, 109, 0.03);
+}
+
+.callout {
+  border-radius: var(--zl-radius-m);
+  border-width: 1px;
+  border-color: rgba(255, 216, 109, 0.14);
+  background: rgba(255, 216, 109, 0.03);
+}
+
+.workspace-tab-header.is-active,
+.workspace-tab-header:hover,
+.nav-file-title:hover,
+.nav-folder-title:hover,
+.menu,
+.vertical-tab-header {
+  background-color: rgba(255, 216, 109, 0.03);
+}
+
+.cm-cursor,
+.markdown-source-view.mod-cm6 .cm-cursor {
+  border-left-color: #ffe9a8;
+  box-shadow: 0 0 8px rgba(255, 233, 168, 0.45);
+}
+
+.cm-activeLine,
+.is-flashing,
+.suggestion-item.is-selected {
+  background-color: rgba(255, 216, 109, 0.05);
+}
+
+.search-result-file-match,
+.search-result-file-matched-text,
+mark {
+  background-color: rgba(255, 216, 109, 0.16);
+  color: #fff4c8;
+}
+
+.view-content,
+.workspace-leaf-content,
+.markdown-preview-view,
+.markdown-source-view.mod-cm6 .cm-scroller {
+  background-color: transparent;
+}
+
+@keyframes zl-crt-flicker {
+  0% {
+    opacity: var(--zl-flicker-a);
+    filter: brightness(0.992);
+  }
+
+  100% {
+    opacity: var(--zl-flicker-b);
+    filter: brightness(1.008);
+  }
+}
