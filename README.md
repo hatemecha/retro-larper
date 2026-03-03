@@ -2,11 +2,7 @@
 
 CRT-inspired Obsidian theme.
 
-Green phosphor is the default.
-
 Use the Style Settings plugin to switch between Amber, Green, and Ice palettes.
-
-![retro-larper default preview](screenshot.png)
 
 ## Screenshots
 
